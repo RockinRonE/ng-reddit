@@ -8,4 +8,10 @@ angular.module("flapperNews", []).controller("MainCtrl", ["$scope", function($sc
 		{title: 'post 5', upvotes: 4}
 	];
 
+	$scope.addPost = function() {
+		if(!scope.title || $scope.title === '') { return; }
+		$scope.posts.push({title: $scope.title, upvotes: 0});
+		$scope.title = ""; //clears input box after post is created
+	};
+
 }]);
