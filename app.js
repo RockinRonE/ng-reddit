@@ -14,4 +14,8 @@ angular.module("flapperNews", []).controller("MainCtrl", ["$scope", function($sc
 		$scope.title = ""; //clears input box after post is created
 	};
 
+	$scope.incrementUpvotes = function(post) {
+		post.upvotes += 1; 
+	};
+
 }]);
