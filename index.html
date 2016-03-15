@@ -7,8 +7,7 @@
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
 
 		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.js"></script>
@@ -16,52 +15,101 @@
 		<script src="app.js"></script>
 		<style>.glyphicon-thumbs-up { cursor: pointer} </style>
 	</head>
+
 	<body ng-app="flapperNews">
+
 		<div class="row">
-
 			<div class="col-md-6 col-md-offset-3">
-			<ui-view></ui-view>
+				<ui-view></ui-view>
+			</div>
+		</div>
 
-			<script type="text/ng-template" id="/home.html">
-				<div class="page-header">
-					<h1>Flapper News</h1>
-				</div>
+		<script type="text/ng-template" id="/home.html">
+			<div class="page-header">
+				<h1>Flapper News</h1>
+			</div>
 
-		<div ng-repeat="post in posts | orderBy:'-upvotes'">
-        <span class="glyphicon glyphicon-thumbs-up"
-          ng-click="incrementUpvotes(post)"></span>
-        {{post.upvotes}}
-        <span style="font-size:20px; margin-left:10px;">
-          <a ng-show="post.link" href="{{post.link}}">
-            {{post.title}}
-          </a>
-          <span ng-hide="post.link">
-            {{post.title}}
-          </span>
-        </span>
-      </div>
+			<div ng-repeat="post in posts | orderBy:'-upvotes'">
+	        <span class="glyphicon glyphicon-thumbs-up"
+	          ng-click="incrementUpvotes(post)"></span>
+	        {{post.upvotes}}
+	        <span style="font-size:20px; margin-left:10px;">
+	          <a ng-show="post.link" href="{{post.link}}">
+	            {{post.title}}
+	          </a>
+	          <span ng-hide="post.link">
+	            {{post.title}}
+	          </span>
+	          <span>
+	          	<a href="#/posts/{{$index}}">Comments</a>
+	        	</span>
+	        </span>
+	      </div>
 
-      <form ng-submit="addPost()"
-        style="margin-top:30px;">
-        <h3>Add a new post</h3>
+	      <form ng-submit="addPost()"
+	        style="margin-top:30px;">
+	        <h3>Add a new post</h3>
 
-        <div class="form-group">
-          <input type="text"
-            class="form-control"
-            placeholder="Title"
-            ng-model="title"></input>
-        </div>
-        <div class="form-group">
-          <input type="text"
-          class="form-control"
-          placeholder="Link"
-          ng-model="link"></input>
-        </div>
-        <button type="submit" class="btn btn-primary">Post</button>
-      </form>
+	        <div class="form-group">
+	          <input type="text"
+	            class="form-control"
+	            placeholder="Title"
+	            ng-model="title"></input>
+	        </div>
+	        <div class="form-group">
+	          <input type="text"
+	          class="form-control"
+	          placeholder="Link"
+	          ng-model="link"></input>
+	        </div>
+	        <button type="submit" class="btn btn-primary">Post</button>
+	      </form>
 
-    </div>
-  </div>
-  </script>
+	    </div>
+  	</script>
+	
+	<script type="text/ng-template" id="/posts.html">
+		<div class="page-header">
+			<h3>
+				<a ng-show="post.link" href="{{post.link}}">
+					{{post.title}}
+				</a>
+				<span ng-hide="post.link">
+					{{post.title}}
+				</span>
+			</h3>
+		</div>
+
+		<div ng-repeat="comment in post.comments | orderBy:'-upvotes'">
+			<span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(comment)"></span>
+			{{comment.upvotes}} - by {{comment.author}}
+			<span style="font-size:20px; margin-left: 10px;">
+				{{comment.body}}
+			</span>
+		</div>
+	</script>
+
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
