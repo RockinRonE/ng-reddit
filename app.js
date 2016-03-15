@@ -1,4 +1,35 @@
-angular.module("flapperNews", []).controller("MainCtrl", ["$scope", function($scope){
+// Factory
+angular.module('flapperNews', ['ui.router'])
+	.factory('posts', [function() {
+		var o = {
+			posts: []
+		};
+		return o; 
+	}])
+	.controller('MainCtrl', [
+		'$scope',
+		'posts',
+		function($scope, posts) {
+			$scope.posts = posts.posts;
+		}])
+
+angular.module('flapperNews', ['ui.router'])
+	.config([
+		'$stateProvider',
+		'$urlRouterProvider',
+		function($stateProvider, $urlRouterProvider) {
+			$stateProvider
+				.state('home', {
+					url: '/home',
+					templateUrl: '/home.html',
+					controller: 'MainCtrl'
+				});
+				$urlRouterProvider.otherwise('home');
+		}])
+
+
+
+angular.module("flapperNews", ['ui.router']).controller("MainCtrl", ["$scope", 'posts', function($scope, posts){
 	$scope.test = "Hello world!";
 	$scope.posts = [
 		{title: 'post 1', upvotes: 5},
@@ -29,4 +60,25 @@ angular.module("flapperNews", []).controller("MainCtrl", ["$scope", function($sc
 		$scope.link	= '';
 	};
 
+
+
 }]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
