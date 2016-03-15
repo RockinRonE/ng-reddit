@@ -27,6 +27,6 @@ angular.module("flapperNews", []).controller("MainCtrl", ["$scope", function($sc
 		});
 		$scope.title = '';
 		$scope.link	= '';
-	}
+	};
 
 }]);
