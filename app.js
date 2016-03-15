@@ -10,7 +10,7 @@ angular.module('flapperNews', []).factory('posts', function() {
 
 
 
-angular.module("flapperNews", []).controller("MainCtrl", ["$scope", function($scope){
+angular.module("flapperNews", []).controller("MainCtrl", ["$scope", 'posts', function($scope, posts){
 	$scope.test = "Hello world!";
 	$scope.posts = [
 		{title: 'post 1', upvotes: 5},
@@ -41,4 +41,25 @@ angular.module("flapperNews", []).controller("MainCtrl", ["$scope", function($sc
 		$scope.link	= '';
 	};
 
+	$scope.posts = posts.posts;
+
 }]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
